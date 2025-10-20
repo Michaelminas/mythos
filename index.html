@@ -37,20 +37,7 @@
             color: var(--light-cream);
         }
 
-        /* Subtle shimmer effect on premium elements */
-        @keyframes shimmer {
-            0% {
-                background-position: -1000px 0;
-            }
-            100% {
-                background-position: 1000px 0;
-            }
-        }
-
-        .ticket-card.vip {
-            animation: shimmer 8s ease-in-out infinite;
-            background-size: 1000px 100%;
-        }
+        /* Subtle shimmer effect - Removed */
         
         /* Floating particles */
         .particles {
@@ -109,10 +96,11 @@
             color: var(--terracotta);
             display: flex;
             align-items: center;
+            justify-content: center;
             animation: fadeInUp 1.5s ease-out;
             margin-bottom: 2rem;
         }
-        
+
         .logo-o {
             display: inline-flex;
             align-items: center;
@@ -120,7 +108,8 @@
             position: relative;
             width: clamp(3.5rem, 9vw, 7rem);
             height: clamp(3.5rem, 9vw, 7rem);
-            margin: 0 0.05em;
+            margin: 0 -0.05em;
+            vertical-align: middle;
         }
 
         .radial-pattern {
@@ -160,9 +149,11 @@
         
         .subtitle {
             font-size: clamp(1rem, 2.5vw, 1.4rem);
-            color: var(--gold);
+            color: var(--dark-terracotta);
             animation: fadeInUp 1.5s ease-out 0.6s both;
             letter-spacing: 0.15em;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
         }
         
         .date-location {
@@ -398,28 +389,9 @@
             position: relative;
         }
         
-        /* Wave Animation */
+        /* Wave Animation - Removed */
         .wave-container {
-            height: 60px;
-            margin: 20px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .wave {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--terracotta) 0%, var(--gold) 50%, var(--terracotta) 100%);
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z' fill='black'/%3E%3C/svg%3E");
-            mask-size: 100% 100%;
-            animation: wave 3s ease-in-out infinite;
-        }
-        
-        @keyframes wave {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(-50px); }
+            display: none;
         }
 
         /* Gallery Section */
@@ -893,23 +865,9 @@
             z-index: 0;
         }
 
-        /* Greek Key Border Decoration */
+        /* Greek Key Border Decoration - Removed */
         .greek-border {
-            width: 100%;
-            height: 8px;
-            background: repeating-linear-gradient(
-                90deg,
-                var(--gold) 0px,
-                var(--gold) 20px,
-                transparent 20px,
-                transparent 25px,
-                var(--gold) 25px,
-                var(--gold) 30px,
-                transparent 30px,
-                transparent 50px
-            );
-            margin: 40px 0;
-            opacity: 0.6;
+            display: none;
         }
 
         /* Decorative Greek Columns */
@@ -1122,7 +1080,6 @@
         <div class="dj-grid">
             <div class="dj-card">
                 <div class="dj-image">
-                    🎧
                 </div>
                 <div class="dj-info">
                     <h3 class="dj-name">DJ Name</h3>
@@ -1133,7 +1090,6 @@
 
             <div class="dj-card">
                 <div class="dj-image">
-                    🎵
                 </div>
                 <div class="dj-info">
                     <h3 class="dj-name">DJ Name</h3>
@@ -1144,7 +1100,6 @@
 
             <div class="dj-card">
                 <div class="dj-image">
-                    🎶
                 </div>
                 <div class="dj-info">
                     <h3 class="dj-name">DJ Name</h3>
