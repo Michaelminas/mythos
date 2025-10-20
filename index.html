@@ -94,22 +94,18 @@
             font-size: clamp(4rem, 10vw, 8rem);
             letter-spacing: 0.3em;
             color: var(--terracotta);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             animation: fadeInUp 1.5s ease-out;
             margin-bottom: 2rem;
+            text-align: center;
         }
 
         .logo-o {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            display: inline-block;
             position: relative;
-            width: clamp(3.5rem, 9vw, 7rem);
-            height: clamp(3.5rem, 9vw, 7rem);
-            margin: 0 -0.05em;
-            vertical-align: middle;
+            width: 1em;
+            height: 1em;
+            margin: 0;
+            vertical-align: baseline;
         }
 
         .radial-pattern {
@@ -205,8 +201,9 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--gold);
+            color: var(--terracotta);
             margin-top: 0.5rem;
+            font-weight: 600;
         }
         
         @keyframes fadeInUp {
@@ -376,10 +373,11 @@
         }
         
         .time-slot .time {
-            color: var(--gold);
+            color: var(--dark-terracotta);
             font-size: 1.2rem;
             margin-bottom: 1rem;
             position: relative;
+            font-weight: 600;
         }
         
         .time-slot .description {
@@ -569,9 +567,10 @@
 
         .dj-genre {
             font-size: 1.1rem;
-            color: var(--gold);
+            color: var(--terracotta);
             font-style: italic;
             margin-bottom: 0.8rem;
+            font-weight: 500;
         }
 
         .dj-time {
@@ -638,8 +637,9 @@
 
         .testimonial-event {
             font-size: 0.95rem;
-            color: var(--gold);
+            color: var(--terracotta);
             margin-top: 0.3rem;
+            font-style: italic;
         }
 
         /* Venue Section */
@@ -723,13 +723,8 @@
         }
 
         .ticket-card.vip::after {
-            content: '✦';
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
-            color: var(--gold);
-            opacity: 0.8;
+            content: '';
+            display: none;
         }
         
         .ticket-type {
@@ -742,8 +737,8 @@
         
         .ticket-price {
             font-size: 2.5rem;
-            color: var(--gold);
-            font-weight: 600;
+            color: var(--dark-terracotta);
+            font-weight: 700;
             margin: 1rem 0;
             position: relative;
         }
@@ -1120,7 +1115,7 @@
         <!-- Video Container -->
         <div class="video-container">
             <div class="video-placeholder">
-                <p>🎥 Watch Our Latest Event</p>
+                <p>Watch Our Latest Event</p>
                 <small>Insert Facebook Reel: https://www.facebook.com/reel/614586018369549</small>
             </div>
         </div>
@@ -1287,7 +1282,7 @@
             document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
 
             if (distance < 0) {
-                document.getElementById('countdown').innerHTML = '<p style="font-size: 1.5rem; color: var(--gold);">The Odyssey Has Begun!</p>';
+                document.getElementById('countdown').innerHTML = '<p style="font-size: 1.5rem; color: var(--dark-terracotta); font-weight: 600; text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);">The Odyssey Has Begun!</p>';
             }
         }
 
