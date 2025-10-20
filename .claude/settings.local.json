@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(move Website.css index.html)",
+      "Bash(git init)",
+      "Bash(git remote add origin https://github.com/Michaelminas/mythos.git)",
+      "Bash(git add .)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: MYTHOS event website with luxury design\n\n- Elegant hero section with rotating logo\n- DJ lineup section\n- Testimonials from past events\n- Live countdown timer\n- Gallery section ready for images/videos\n- Greek cultural motifs and decorative elements\n- Fully responsive design (mobile, tablet, desktop)\n- Premium luxury styling with subtle animations\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

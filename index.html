@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYTHOS - Where Three Worlds Dance as One</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --cream: #D4C4B0;
+            --terracotta: #A67B5B;
+            --dark-terracotta: #8B6543;
+            --gold: #D4A574;
+            --light-cream: #EDE4D3;
+            --shadow: rgba(166, 123, 91, 0.2);
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--light-cream) 50%, var(--cream) 100%);
+            color: var(--terracotta);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Luxury Enhancements */
+        ::selection {
+            background: var(--gold);
+            color: var(--light-cream);
+        }
+
+        /* Subtle shimmer effect on premium elements */
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .ticket-card.vip {
+            animation: shimmer 8s ease-in-out infinite;
+            background-size: 1000px 100%;
+        }
+        
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 30s infinite linear;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 10vw, 8rem);
+            letter-spacing: 0.3em;
+            color: var(--terracotta);
+            display: flex;
+            align-items: center;
+            animation: fadeInUp 1.5s ease-out;
+            margin-bottom: 2rem;
+        }
+        
+        .logo-o {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: clamp(3.5rem, 9vw, 7rem);
+            height: clamp(3.5rem, 9vw, 7rem);
+            margin: 0 0.05em;
+        }
+
+        .radial-pattern {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: rotate 60s linear infinite;
+            opacity: 0.6;
+        }
+
+        .radial-line {
+            position: absolute;
+            width: 50%;
+            height: 1.5px;
+            background: var(--terracotta);
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 50%;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--gold);
+            animation: fadeInUp 1.5s ease-out 0.6s both;
+            letter-spacing: 0.15em;
+        }
+        
+        .date-location {
+            margin-top: 3rem;
+            text-align: center;
+            animation: fadeInUp 1.5s ease-out 0.9s both;
+        }
+
+        .date-location h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--dark-terracotta);
+            margin-bottom: 0.5rem;
+        }
+
+        .date-location p {
+            font-size: 1.2rem;
+            color: var(--terracotta);
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 20px 25px;
+            border-radius: 15px;
+            min-width: 80px;
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .countdown-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-terracotta);
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-top: 0.5rem;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator::before {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--terracotta);
+            border-radius: 25px;
+            position: relative;
+        }
+        
+        .scroll-indicator::after {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: var(--terracotta);
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollDot 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        
+        @keyframes scrollDot {
+            0% { top: 10px; opacity: 1; }
+            50% { top: 30px; opacity: 0.5; }
+            100% { top: 10px; opacity: 1; }
+        }
+        
+        /* Experience Section */
+        .section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .experience {
+            text-align: center;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--dark-terracotta);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        
+        .section.in-view .section-title {
+            animation-play-state: running;
+        }
+        
+        .experience-text {
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--terracotta);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            animation-play-state: paused;
+        }
+        
+        .section.in-view .experience-text {
+            animation-play-state: running;
+        }
+        
+        .highlight {
+            color: var(--gold);
+            font-weight: 600;
+            font-style: italic;
+        }
+        
+        /* Music Journey */
+        .music-journey {
+            background: linear-gradient(135deg, rgba(166, 123, 91, 0.1) 0%, transparent 100%);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-top: 80px;
+            box-shadow: 0 10px 40px rgba(166, 123, 91, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        
+        .journey-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 4rem;
+            color: var(--dark-terracotta);
+        }
+        
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 3rem;
+        }
+        
+        .time-slot {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-slot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--gold) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .time-slot:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px var(--shadow);
+        }
+
+        .time-slot:hover::before {
+            opacity: 0.08;
+        }
+        
+        .time-slot h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dark-terracotta);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .time-slot .time {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .time-slot .description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--terracotta);
+            position: relative;
+        }
+        
+        /* Wave Animation */
+        .wave-container {
+            height: 60px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wave {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--terracotta) 0%, var(--gold) 50%, var(--terracotta) 100%);
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z' fill='black'/%3E%3C/svg%3E");
+            mask-size: 100% 100%;
+            animation: wave 3s ease-in-out infinite;
+        }
+        
+        @keyframes wave {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-50px); }
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px var(--shadow);
+            background: rgba(255, 255, 255, 0.5);
+            aspect-ratio: 16 / 9;
+            position: relative;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(166, 123, 91, 0.1) 0%, rgba(212, 165, 116, 0.1) 100%);
+            padding: 40px;
+        }
+
+        .video-placeholder p {
+            font-size: 1.5rem;
+            color: var(--dark-terracotta);
+            margin-bottom: 1rem;
+        }
+
+        .video-placeholder small {
+            font-size: 0.9rem;
+            color: var(--terracotta);
+            opacity: 0.7;
+        }
+
+        /* Photo Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 3rem;
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .photo-item.large {
+            grid-column: span 2;
+            aspect-ratio: 16 / 9;
+        }
+
+        .photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(166, 123, 91, 0.3);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(166, 123, 91, 0.15) 0%, rgba(212, 165, 116, 0.15) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(212, 165, 116, 0.1) 50%, transparent 70%);
+        }
+
+        .photo-placeholder span {
+            font-size: 1.2rem;
+            color: var(--terracotta);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-align: center;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        /* Responsive Grid */
+        @media (max-width: 768px) {
+            .photo-item.large {
+                grid-column: span 1;
+                aspect-ratio: 4 / 3;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* DJ Lineup Section */
+        .dj-lineup {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .dj-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 35px;
+            margin-top: 4rem;
+        }
+
+        .dj-card {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .dj-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(166, 123, 91, 0.3);
+        }
+
+        .dj-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(135deg, rgba(166, 123, 91, 0.2) 0%, rgba(212, 165, 116, 0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dj-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(212, 165, 116, 0.15) 50%, transparent 70%);
+        }
+
+        .dj-info {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .dj-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dark-terracotta);
+            margin-bottom: 0.5rem;
+        }
+
+        .dj-genre {
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-style: italic;
+            margin-bottom: 0.8rem;
+        }
+
+        .dj-time {
+            font-size: 1rem;
+            color: var(--terracotta);
+            letter-spacing: 0.05em;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            padding: 40px 35px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(166, 123, 91, 0.3);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            color: var(--gold);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--terracotta);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-author {
+            font-size: 1.1rem;
+            color: var(--dark-terracotta);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .testimonial-event {
+            font-size: 0.95rem;
+            color: var(--gold);
+            margin-top: 0.3rem;
+        }
+
+        /* Venue Section */
+        .venue-section {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.12) 0%, rgba(166, 123, 91, 0.08) 100%);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-top: 80px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(166, 123, 91, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .venue-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--dark-terracotta);
+            margin-bottom: 2rem;
+        }
+        
+        .venue-info {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .intimate-note {
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Tickets */
+        .tickets {
+            margin-top: 80px;
+        }
+        
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+        
+        .ticket-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ticket-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px var(--shadow);
+        }
+
+        .ticket-card:hover::before {
+            opacity: 0.08;
+        }
+        
+        .ticket-card.vip {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.4) 0%, rgba(255, 255, 255, 0.95) 100%);
+            border: 3px solid var(--gold);
+            position: relative;
+        }
+
+        .ticket-card.vip::after {
+            content: '✦';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--gold);
+            opacity: 0.8;
+        }
+        
+        .ticket-type {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dark-terracotta);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .ticket-price {
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .ticket-details {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--terracotta);
+            position: relative;
+        }
+        
+        .btn-purchase {
+            margin-top: 2rem;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--terracotta) 0%, var(--dark-terracotta) 100%);
+            color: var(--light-cream);
+            border: 2px solid transparent;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 8px 20px var(--shadow);
+            overflow: hidden;
+        }
+
+        .btn-purchase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-purchase:hover::before {
+            left: 100%;
+        }
+
+        .btn-purchase:hover {
+            background: linear-gradient(135deg, var(--dark-terracotta) 0%, var(--terracotta) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(166, 123, 91, 0.35);
+            border-color: var(--gold);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 100px;
+            border-top: 1px solid rgba(166, 123, 91, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            color: var(--terracotta);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--gold);
+        }
+        
+        .footer-text {
+            font-size: 1.1rem;
+            color: var(--terracotta);
+            margin-top: 1rem;
+        }
+        
+        .age-restriction {
+            margin-top: 2rem;
+            padding: 15px 30px;
+            display: inline-block;
+            border: 2px solid var(--terracotta);
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Greek Pattern Background */
+        .greek-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.04;
+            background-image:
+                repeating-linear-gradient(
+                    90deg,
+                    var(--terracotta) 0px,
+                    var(--terracotta) 1px,
+                    transparent 1px,
+                    transparent 25px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    var(--terracotta) 0px,
+                    var(--terracotta) 1px,
+                    transparent 1px,
+                    transparent 25px
+                );
+            z-index: 0;
+        }
+
+        /* Greek Key Border Decoration */
+        .greek-border {
+            width: 100%;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--gold) 0px,
+                var(--gold) 20px,
+                transparent 20px,
+                transparent 25px,
+                var(--gold) 25px,
+                var(--gold) 30px,
+                transparent 30px,
+                transparent 50px
+            );
+            margin: 40px 0;
+            opacity: 0.6;
+        }
+
+        /* Decorative Greek Columns */
+        .greek-columns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            opacity: 0.5;
+        }
+
+        .column-icon {
+            width: 4px;
+            height: 60px;
+            background: linear-gradient(180deg, var(--gold) 0%, var(--terracotta) 50%, var(--gold) 100%);
+            border-radius: 2px;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3rem;
+                letter-spacing: 0.2em;
+            }
+
+            .logo-o {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .ticket-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dj-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-slider {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown {
+                gap: 15px;
+            }
+
+            .countdown-item {
+                min-width: 65px;
+                padding: 15px 20px;
+            }
+
+            .countdown-value {
+                font-size: 2rem;
+            }
+
+            .music-journey,
+            .venue-section {
+                padding: 40px 25px;
+            }
+
+            .wave-container {
+                height: 40px;
+            }
+
+            .column-icon {
+                height: 40px;
+            }
+        }
+
+        /* Tablet Responsive */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dj-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ticket-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-slider {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Greek Pattern Background -->
+    <div class="greek-pattern"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="logo">
+            MYTH<span class="logo-o">
+                <div class="radial-pattern" id="radialPattern"></div>
+            </span>S
+        </h1>
+        <p class="tagline">Where Three Worlds Dance as One</p>
+        <p class="subtitle">Euro × House × Greek</p>
+        
+        <div class="date-location">
+            <h3>Saturday, October 12th 2024</h3>
+            <p>The Ivy, Sydney</p>
+
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator"></div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section class="section experience" id="experience">
+        <div class="greek-columns">
+            <div class="column-icon"></div>
+            <div class="column-icon"></div>
+            <div class="column-icon"></div>
+        </div>
+        <h2 class="section-title">The Mythos Experience</h2>
+        <p class="experience-text">
+            Step into an intimate sanctuary where <span class="highlight">European underground meets House classics meets Hellenic rhythms</span>. 
+            MYTHOS isn't just another night out — it's a carefully curated journey through sound, where 500 souls unite in a celebration of cultural fusion.
+        </p>
+        <p class="experience-text">
+            No massive crowds. No corporate coldness. Just <span class="highlight">pure musical alchemy</span> in Sydney's most intimate dance sanctuary.
+        </p>
+    </section>
+    
+    <!-- Music Journey -->
+    <section class="section">
+        <div class="music-journey">
+            <div class="greek-border"></div>
+            <h2 class="journey-title">Three Sounds, One Night</h2>
+            
+            <div class="wave-container">
+                <div class="wave"></div>
+            </div>
+            
+            <div class="timeline">
+                <div class="time-slot">
+                    <h3>European Underground</h3>
+                    <p class="time">10PM - 12AM</p>
+                    <p class="description">
+                        Deep house vibrations from Berlin basements. 
+                        Techno that moves your soul. 
+                        The night begins with sophisticated European soundscapes.
+                    </p>
+                </div>
+                
+                <div class="time-slot">
+                    <h3>House Classics</h3>
+                    <p class="time">12AM - 2AM</p>
+                    <p class="description">
+                        From Chicago to London, we journey through the roots of house. 
+                        Timeless tracks that built the culture. 
+                        Peak energy, pure euphoria.
+                    </p>
+                </div>
+                
+                <div class="time-slot">
+                    <h3>Hellenic Heat</h3>
+                    <p class="time">2AM - Late</p>
+                    <p class="description">
+                        Modern Greek anthems meet traditional rhythms. 
+                        Bouzouki meets bass. 
+                        The dancefloor becomes Mount Olympus.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- DJ Lineup Section -->
+    <section class="section dj-lineup">
+        <h2 class="section-title">The Sound Architects</h2>
+        <p class="experience-text" style="max-width: 700px;">
+            Curated masters guiding you through three distinct sonic worlds
+        </p>
+
+        <div class="dj-grid">
+            <div class="dj-card">
+                <div class="dj-image">
+                    🎧
+                </div>
+                <div class="dj-info">
+                    <h3 class="dj-name">DJ Name</h3>
+                    <p class="dj-genre">European Underground</p>
+                    <p class="dj-time">10PM - 12AM</p>
+                </div>
+            </div>
+
+            <div class="dj-card">
+                <div class="dj-image">
+                    🎵
+                </div>
+                <div class="dj-info">
+                    <h3 class="dj-name">DJ Name</h3>
+                    <p class="dj-genre">House Classics</p>
+                    <p class="dj-time">12AM - 2AM</p>
+                </div>
+            </div>
+
+            <div class="dj-card">
+                <div class="dj-image">
+                    🎶
+                </div>
+                <div class="dj-info">
+                    <h3 class="dj-name">DJ Name</h3>
+                    <p class="dj-genre">Hellenic Heat</p>
+                    <p class="dj-time">2AM - Late</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery-section">
+        <h2 class="section-title" style="text-align: center;">The MYTHOS Experience</h2>
+        <p class="experience-text" style="text-align: center; margin-bottom: 3rem;">
+            Every night tells a story. Every beat creates a memory.
+        </p>
+        
+        <!-- Video Container -->
+        <div class="video-container">
+            <div class="video-placeholder">
+                <p>🎥 Watch Our Latest Event</p>
+                <small>Insert Facebook Reel: https://www.facebook.com/reel/614586018369549</small>
+            </div>
+        </div>
+        
+        <!-- Photo Grid -->
+        <div class="photo-grid">
+            <div class="photo-item large">
+                <div class="photo-placeholder">
+                    <span>DJ Booth View</span>
+                </div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">
+                    <span>Dance Floor Energy</span>
+                </div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">
+                    <span>VIP Tables</span>
+                </div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">
+                    <span>Greek Pride Moment</span>
+                </div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">
+                    <span>Crowd Vibes</span>
+                </div>
+            </div>
+            <div class="photo-item large">
+                <div class="photo-placeholder">
+                    <span>Live Performance</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <h2 class="section-title">Voices from the Odyssey</h2>
+        <p class="experience-text" style="max-width: 700px;">
+            Hear from souls who've danced with us
+        </p>
+
+        <div class="testimonial-slider">
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "MYTHOS isn't just a party—it's a transcendent journey. The way they blend European beats with Greek soul is pure magic."
+                </p>
+                <p class="testimonial-author">— Alexandra M.</p>
+                <p class="testimonial-event">MYTHOS Vol. 3</p>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "The intimate setting makes all the difference. You're not lost in a crowd—you're part of something special."
+                </p>
+                <p class="testimonial-author">— Dimitri K.</p>
+                <p class="testimonial-event">MYTHOS Vol. 2</p>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "From the moment I walked in, I knew this was different. Premium production, world-class DJs, unforgettable atmosphere."
+                </p>
+                <p class="testimonial-author">— Sofia L.</p>
+                <p class="testimonial-event">MYTHOS Vol. 4</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Venue Section -->
+    <section class="section">
+        <div class="venue-section">
+            <h2 class="venue-title">Our Space</h2>
+            <p class="venue-info">
+                <strong>The Ivy • Penthouse Level</strong><br>
+                330 George Street, Sydney NSW 2000
+            </p>
+            <p class="venue-info">
+                Transformed into a Mediterranean dream with state-of-the-art sound<br>
+                and immersive visual production that responds to the music's journey.
+            </p>
+            <p class="intimate-note">
+                "500 souls, not 5000. Every night at MYTHOS is personal."
+            </p>
+        </div>
+    </section>
+    
+    <!-- Tickets Section -->
+    <section class="section tickets">
+        <div class="greek-columns">
+            <div class="column-icon"></div>
+            <div class="column-icon"></div>
+            <div class="column-icon"></div>
+        </div>
+        <h2 class="section-title" style="text-align: center;">Join the Odyssey</h2>
+        
+        <div class="ticket-grid">
+            <div class="ticket-card">
+                <h3 class="ticket-type">Odyssey Pass</h3>
+                <p class="ticket-price">$45</p>
+                <p class="ticket-details">
+                    Early Bird Special<br>
+                    Entry before 11PM<br>
+                    Limited to first 100
+                </p>
+                <button class="btn-purchase">SECURE PASS</button>
+            </div>
+            
+            <div class="ticket-card">
+                <h3 class="ticket-type">Mythos Entry</h3>
+                <p class="ticket-price">$65</p>
+                <p class="ticket-details">
+                    General Admission<br>
+                    Full night access<br>
+                    Coat check included
+                </p>
+                <button class="btn-purchase">GET TICKETS</button>
+            </div>
+            
+            <div class="ticket-card vip">
+                <h3 class="ticket-type">Oracle Table</h3>
+                <p class="ticket-price">$1500</p>
+                <p class="ticket-details">
+                    VIP Table for 6<br>
+                    Premium bottle service<br>
+                    Only 5 tables available
+                </p>
+                <button class="btn-purchase">RESERVE TABLE</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="#">INSTAGRAM</a>
+            <a href="#">FACEBOOK</a>
+            <a href="#">CONTACT</a>
+        </div>
+        <p class="footer-text">MYTHOS - An Intimate Odyssey</p>
+        <p class="footer-text">Sydney's Premier Cultural Fusion Experience</p>
+        <div class="age-restriction">18+ EVENT • VALID ID REQUIRED</div>
+    </footer>
+    
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const eventDate = new Date('October 12, 2024 22:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<p style="font-size: 1.5rem; color: var(--gold);">The Odyssey Has Begun!</p>';
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Create radial pattern
+        const radialPattern = document.getElementById('radialPattern');
+        for (let i = 0; i < 24; i++) {
+            const line = document.createElement('div');
+            line.className = 'radial-line';
+            line.style.transform = `rotate(${i * 15}deg)`;
+            radialPattern.appendChild(line);
+        }
+        
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 20}s`;
+            particle.style.animationDuration = `${20 + Math.random() * 10}s`;
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Mouse follow effect on hero
+        const hero = document.querySelector('.hero');
+        hero.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            hero.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(212, 165, 116, 0.1) 0%, transparent 50%)`;
+        });
+    </script>
+</body>
+</html>
